@@ -4,13 +4,13 @@ from flask import Flask
 
 app = Flask(__name__)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
 @app.route('/')
 def index():
     return "Index Page"
-
-@app.route('/hello')
-def hello():
-    return f"Hello, World!"
 
 
 from markupsafe import escape
@@ -46,21 +46,21 @@ def about():
     # 내용: url_for(함수명, 인자)를 사용해서 해당 라우팅의 url을 호출 할 수 있음
     -------------------------------------------------------------- 
 '''
-from flask import url_for
+# from flask import url_for
 
-@app.route('/login')
-def login():
-    return "login"
+# @app.route('/login')
+# def login():
+#     return "login"
 
-@app.route('/user/<username>')
-def profile(username):
-    return f"{username}\'s profile"
+# @app.route('/user/<username>')
+# def profile(username):
+#     return f"{username}\'s profile"
 
-with app.test_request_context():
-    print(url_for('index'))
-    print(url_for('login'))
-    print(url_for('login', next='/'))
-    print(url_for('profile', username='John Doe'))
+# with app.test_request_context():
+#     print(url_for('index'))
+#     print(url_for('login'))
+#     print(url_for('login', next='/'))
+#     print(url_for('profile', username='John Doe'))
 
 from flask import request
 @app.route('/login', methods=['GET', 'POST'])
@@ -78,6 +78,7 @@ def show_the_login_form():
     print("show_the_login_form")
     return "show_the_login_form"
 
+
 # Flask에서 제공하는 RFC 사용
 @app.get('/login/rfc')
 def login_get():
@@ -86,3 +87,12 @@ def login_get():
 @app.post('/login/rfc')
 def login_post():
     return do_the_login()
+
+
+# 템플릿 render 처리 방법
+from flask import render_template
+
+@app.route('/hello/render')
+@app.route('/hello/render/<name>')
+def hello(name=None):
+    return render_template('/hello.html', name=name)
