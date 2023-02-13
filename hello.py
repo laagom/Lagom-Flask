@@ -40,3 +40,24 @@ def projects():
 def about():
     # 기본적으로 endpoint에 /(slash)가 추가되기 때문에 404 error페이지로 가지 않음
     return "The about page"
+
+
+'''
+    # 내용: url_for(함수명, 인자)를 사용해서 해당 라우팅의 url을 호출 할 수 있음
+    -------------------------------------------------------------- 
+'''
+from flask import url_for
+
+@app.route('/login')
+def login():
+    return "login"
+
+@app.route('/user/<username>')
+def profile(username):
+    return f"{username}\'s profile"
+
+with app.test_request_context():
+    print(url_for('index'))
+    print(url_for('login'))
+    print(url_for('login', next='/'))
+    print(url_for('profile', username='John Doe'))
