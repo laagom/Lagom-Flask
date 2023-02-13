@@ -78,11 +78,11 @@ def show_the_login_form():
     print("show_the_login_form")
     return "show_the_login_form"
 
-# # Flask에서 제공하는 RFC 사용
-# @app.get('/login/rfc')
-# def login_get():
-#     return show_the_login_form()
+# Flask에서 제공하는 RFC 사용
+@app.get('/login/rfc')
+def login_get():
+    return show_the_login_form()
 
-# @app.post('/login/rfc')
-# def login_post():
-#     return do_the_login()
+@app.post('/login/rfc')
+def login_post():
+    return do_the_login()
