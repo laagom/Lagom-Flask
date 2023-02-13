@@ -61,3 +61,28 @@ with app.test_request_context():
     print(url_for('login'))
     print(url_for('login', next='/'))
     print(url_for('profile', username='John Doe'))
+
+from flask import request
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        return do_the_login()
+    else:
+        return show_the_login_form()
+
+def do_the_login():
+    print("do_the_login")
+    return "do_the_login"
+
+def show_the_login_form():
+    print("show_the_login_form")
+    return "show_the_login_form"
+
+# # Flask에서 제공하는 RFC 사용
+# @app.get('/login/rfc')
+# def login_get():
+#     return show_the_login_form()
+
+# @app.post('/login/rfc')
+# def login_post():
+#     return do_the_login()
