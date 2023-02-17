@@ -96,3 +96,10 @@ from flask import render_template
 @app.route('/hello/render/<name>')
 def hello(name=None):
     return render_template('/hello.html', name=name)
+
+# request args를 이용하여 request 값 받아보기
+from flask import request
+@app.route('/args')
+def args():
+    print(request.args['keyword'])
+    return 'hello'
